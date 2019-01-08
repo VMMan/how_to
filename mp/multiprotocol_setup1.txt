@@ -19,23 +19,20 @@ ls -al
 ls -le this_is_isilon.txt
 ls -len this_is_isilon.txt
 
-
-
 ###1b.setup SmartConnect on DNS server
-###Add A record ssip-isilon.demo.local
+###Add A record ssip-isilon.demo.local 192.168.1.100
 ###Add NS record mp.demo.local - ssip-isilon.demo.local
 
 ###test DNS
 nslookup mp.demo.local
 
-
-
 ###2.create SMB share
 
 isi smb shares create --zone=System --path=/ifs/mp --name=mp
 
-
 ###3.create export
+
+isi nfs exports create /ifs/mp --read-write-clients=192.168.1.0/24
 
 ###4.review file permissions from isilon
 
